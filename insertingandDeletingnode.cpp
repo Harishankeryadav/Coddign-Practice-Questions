@@ -31,7 +31,7 @@ Node *TakeInpute()
 
 Node *InsrertNode(Node *head, int data, int i)
 {
-    int cout = 1;
+    int count = 1;
     Node *NewNode = new Node(data);
     Node *temp = head;
 
@@ -42,8 +42,13 @@ Node *InsrertNode(Node *head, int data, int i)
         return head;
     }
 
-    while (cout <= i - 1 && temp != NULL)
+    while (count <= i - 1 && temp != NULL)
     {
+        temp=temp->next;
+        count++;
+    }
+    if(temp!=NULL){
+        
         NewNode->next = temp->next;
         temp->next = NewNode;
     }
@@ -60,7 +65,7 @@ Node *delete_Node(Node *head, int i)
         return head;
     }
 
-    while (head != NULL && count <= i - 1)
+    while (head != NULL && count < i - 1)
     {
         temp = temp->next;
         count++;
@@ -92,6 +97,7 @@ int main()
     head = InsrertNode(head, 987, 3);
     print(head);
 
+    cout<<endl;
     head = delete_Node(head, 2);
     print(head);
 
