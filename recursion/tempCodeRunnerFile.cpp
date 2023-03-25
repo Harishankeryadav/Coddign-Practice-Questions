@@ -1,0 +1,1 @@
+eck_number(arr, s+1,size,key);
