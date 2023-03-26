@@ -92,4 +92,5 @@ int main()
     cin >> data;
     int num = FindNode(head, data);
     cout << "Index of the given data is : " << num;
+    return 0;
 }
