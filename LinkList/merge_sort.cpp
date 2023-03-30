@@ -1,7 +1,5 @@
-// merging to sorted array via Linked List.
-
 #include <iostream>
-#include "List_Node.cpp"
+#include "linkedList.cpp"
 using namespace std;
 
 Node *Take_Input()
@@ -10,58 +8,23 @@ Node *Take_Input()
     cin >> data;
     Node *head = NULL;
     Node *tail = NULL;
+
     while (data != -1)
     {
-        Node *NewNode = new Node(data);
+        Node *newnode = new Node(data);
         if (head == NULL)
         {
-            head = NewNode;
-            tail = NewNode;
+            head = newnode;
+            tail = newnode;
         }
         else
         {
-            tail->next = NewNode;
-            tail = NewNode;
+            tail->next = newnode;
+            tail = newnode;
         }
         cin >> data;
     }
     return head;
-}
-
-Node *Merge_Sort(Node *head1, Node *head2)
-{
-    Node *h1 = head1;
-    Node *h2 = head2;
-    Node *NewHead = new Node(0);
-    Node *NewTail = NewHead;
-
-    while (h1 != NULL && h2 != NULL)
-    {
-        if (h1->data < h2->data)
-        {
-            NewTail->next = h1;
-            h1 = h1->next;
-        }
-        else
-        {
-            NewTail->next = h2;
-            h2 = h2->next;
-        }
-        NewTail = NewTail->next;
-    }
-    while (h1 != NULL)
-    {
-        NewTail->next = h1;
-        h1 = h1->next;
-        NewTail = NewTail->next;
-    }
-    while (h2 != NULL)
-    {
-        NewTail->next = h2;
-        h2 = h2->next;
-        NewTail = NewTail->next;
-    }
-    return NewHead->next;
 }
 
 void print(Node *head)
@@ -75,15 +38,88 @@ void print(Node *head)
     cout << endl;
 }
 
+// iterative sorting.
+Node *Sorting(Node *head)
+{                           // 5 3 1 4 9 6 7 -1
+    Node *temp = head;
+    Node *temp1 = head->next;
+    Node *temp2 = new Node(0); // temporary node used for swaping.
+    int count = 0;
+    while (temp != NULL)
+    {
+        while (temp1 != NULL)
+        {
+            if (temp->data < temp1->data)
+            {
+                temp2->data = temp1->data;
+                temp1->data = temp->data;
+                temp->data = temp2->data;
+            }
+
+            temp1 = temp1->next;
+            print(head);
+        }
+        count++;
+        temp = temp->next;
+        for (int i = 0; i <= count; i++)
+        {
+            temp1 = head->next;
+        }
+    }
+    delete temp2;
+    return head;
+}
+
+Node *merge_sort(Node *head1, Node *head2)
+{
+    Node *h1 = head1;
+    Node *h2 = head2;
+    Node *Newhead = new Node(0);
+    Node *Newtail = Newhead;
+    while (h1 != NULL && h2 != NULL)
+    {
+        if (h1->data < h2->data)
+        {
+            Newtail->next = h1;
+            h1 = h1->next;
+        }
+        else
+        {
+            Newtail->next = h2;
+            h2 = h2->next;
+        }
+        Newtail = Newtail->next;
+    }
+
+    while (h1 != NULL)
+    {
+        Newtail->next = h1;
+        h1 = h1->next;
+        Newtail = Newtail->next;
+    }
+    while (h2 != NULL)
+    {
+        Newtail->next = h2;
+        h2 = h2->next;
+        Newtail = Newtail->next;
+    }
+    return Newhead->next;
+}
+
 int main()
 {
-    cout << "Enter the data of first list ";
+    cout << "Enter the data : ";
     Node *head1 = Take_Input();
+    cout << "head1 : ";
+    // print(head1);
+
+    head1 = Sorting(head1);
     print(head1);
-    cout << "Enter the data of second list ";
-    Node *head2 = Take_Input();
-    print(head2);
-    Node *NewHead = Merge_Sort(head1, head2);
-    cout << "After merging the list \n";
-    print(NewHead);
+
+    // Node *head2 = Take_Input();
+    // cout << "head2 : ";
+    // print(head2);
+    // Node *head = merge_sort(head1, head2);
+    // cout << "head : ";
+    // print(head);
 }
