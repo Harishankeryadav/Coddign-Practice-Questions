@@ -56,6 +56,31 @@ Node *reverseLL(Node *head, Node *prev, Node *next)
     return newhead;
 }
 
+// Node *reverseLL(Node *head)
+// {
+
+//     if (head == NULL || head->next == NULL)
+//     {
+//         return head;
+//     }
+//     // else
+//     // {
+//     //     next = head->next;
+//     //     head->next = prev;
+//     //     prev = head;
+//     //     head = next;
+//     // }
+//     Node *newhead = reverseLL(head->next);
+//     Node *temp = newhead;
+//     while (temp->next != NULL)
+//     {
+//         temp = temp->next;
+//     }
+//     temp->next = head;
+//     head->next = NULL;
+//     return newhead;
+// }
+
 int main()
 {
     Node *prev = NULL;
