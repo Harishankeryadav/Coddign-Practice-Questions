@@ -39,23 +39,60 @@ void print(Node *head)
     cout << endl;
 }
 
-Node *reverseLL(Node *head, Node *prev, Node *next)
+
+//by recursion
+// Node *reverseLL(Node *head, Node *prev, Node *next)
+// {
+//     if (head == NULL)
+//     {
+//         return prev;
+//     }
+//     else
+//     {
+//         next = head->next;
+//         head->next = prev;
+//         prev = head;
+//         head = next;
+//     }
+//     Node *newhead = reverseLL(head, prev, next);
+//     return newhead;
+// }
+
+//better approach of recursion
+
+class LL
 {
-    if (head == NULL)
+public:
+    Node *head;
+    Node *tail;
+};
+
+LL reverse(Node *head)
+{
+    if (head == NULL || head->next == NULL)
     {
-        return prev;
+        LL ans;
+        ans.head = head;
+        ans.tail = head;
+        return ans;
     }
-    else
-    {
-        next = head->next;
-        head->next = prev;
-        prev = head;
-        head = next;
-    }
-    Node *newhead = reverseLL(head, prev, next);
-    return newhead;
+
+    LL newhead = reverse(head->next);
+    newhead.tail->next = head;
+    head->next = NULL;
+    LL ans;
+    ans.head = newhead.head;
+    ans.tail = head;
+
+    return ans;
 }
 
+Node *reverseLL(Node *head)
+{
+    return reverse(head).head;
+}
+
+// iterative 
 // Node *reverseLL(Node *head)
 // {
 
