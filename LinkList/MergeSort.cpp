@@ -116,4 +116,5 @@ int main()
     cout << "sorted list \n";
     head = Merge_sort(head);
     print(head);
+    return 0;
 }
