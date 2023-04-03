@@ -16,16 +16,17 @@ public:
         capacity = totalsize;
     }
 
+//gives the size of the array
     int size()
     {
         return nextIndex;
     }
-
+//gives the details weather the array is empty or not
     bool isEmpty()
     {
         return nextIndex == 0;
     }
-
+//pushes the element on top of the list 
     void push(int data)
     {
 
@@ -37,7 +38,7 @@ public:
         arr[nextIndex] = data;
         nextIndex++;
     }
-
+//pops the element from the topmost of the list
     int pop()
     {
         if (isEmpty())
@@ -48,7 +49,7 @@ public:
         nextIndex--;
         return arr[nextIndex];
     }
-
+//always prints the topmost element 
     int top()
     {
         return arr[nextIndex - 1];
