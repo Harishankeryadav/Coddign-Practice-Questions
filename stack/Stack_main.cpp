@@ -27,17 +27,36 @@ public:
         return nextIndex == 0;
     }
 //pushes the element on top of the list 
+    // void push(int data)
+    // {
+
+    //     if (nextIndex == capacity)
+    //     {
+    //         cout << "Stack is full " << endl;
+    //         return;
+    //     }
+    //     arr[nextIndex] = data;
+    //     nextIndex++;
+    // }
+
+     // dynamic memory allocation
     void push(int data)
     {
-
         if (nextIndex == capacity)
         {
-            cout << "Stack is full " << endl;
-            return;
+            int *NewArray = new int[2 * capacity];
+            for (int i = 0; i < capacity; i++)
+            {
+                NewArray[i] = arr[i];
+            }
+            delete[] arr;
+            arr = NewArray;
         }
         arr[nextIndex] = data;
         nextIndex++;
     }
+
+
 //pops the element from the topmost of the list
     int pop()
     {
