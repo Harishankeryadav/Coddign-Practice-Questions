@@ -1,0 +1,56 @@
+#include <iostream>
+#include <climits>
+using namespace std;
+
+class stackUsingArray
+{
+    int *arr;
+    int nextIndex;
+    int capacity;
+
+public:
+    stackUsingArray(int totalsize)
+    {
+        arr = new int[totalsize];
+        nextIndex = 0;
+        capacity = totalsize;
+    }
+
+    int size()
+    {
+        return nextIndex;
+    }
+
+    bool isEmpty()
+    {
+        return nextIndex == 0;
+    }
+
+    void push(int data)
+    {
+
+        if (nextIndex == capacity)
+        {
+            cout << "Stack is full " << endl;
+            return;
+        }
+        arr[nextIndex] = data;
+        nextIndex++;
+    }
+
+    int pop()
+    {
+        if (isEmpty())
+        {
+            cout << "Stack is empty " << endl;
+            return INT_MIN;
+        }
+        nextIndex--;
+        return arr[nextIndex];
+    }
+
+    int top()
+    {
+        return arr[nextIndex - 1];
+    }
+};
