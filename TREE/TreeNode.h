@@ -1,16 +1,18 @@
 #include <iostream>
-#include <vector>
 using namespace std;
 template <typename T>
 
-class TreeNode
+class Node
 {
 public:
     T data;
-    vector<TreeNode<T> *> children;
+   Node* left;
+   Node* right;
 
     TreeNode(T data)
     {
         this->data = data;
+        left = NULL;
+        right = NULL;
     }
 };
