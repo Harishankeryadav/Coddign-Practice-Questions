@@ -1,6 +1,7 @@
-//we will  be finding the height and diameter of the tree.
+// we will  be finding the height and diameter of the tree.
 #include <iostream>
 #include <queue>
+#include <utility>
 #include "TreeNode.h"
 using namespace std;
 
@@ -112,19 +113,44 @@ int height(Node<int> *root)
 
 // finding the width of tree.
 
-int diameter(Node<int> *root)
-{
+// int diameter(Node<int> *root)
+// {
 
+//     if (root == NULL)
+//     {
+//         return 0;
+//     }
+
+//     int l = diameter(root->left);
+//     int r = diameter(root->right);
+//     int h = height(root->left) + height(root->right) + 1;
+//     int ans = max(l, max(r, h));
+//     return ans;
+// }
+
+pair<int, int> diameter(Node<int> *root)
+{
+    //height = second and diameter = first;
     if (root == NULL)
     {
-        return 0;
+        pair<int, int> p = make_pair(0, 0);
+        return p;
     }
 
-    int l = diameter(root->left);
-    int r = diameter(root->right);
-    int h = height(root->left) + height(root->right) + 1;
-    int ans = max(l, max(r, h));
-    return ans;
+    pair<int,int> left = diameter(root->left);
+    pair<int,int> right = diameter(root->right);
+
+    int opn1 = left.second;
+    int opn2 = right.second;
+    int opn3 = left.first+right.first+1;
+
+    pair<int,int> ans;
+    //diameter
+    ans.first = max(opn1, max(opn2,opn3));
+    //height
+    ans.second = max(left.first , right.first)+1;
+
+    return ans;    
 }
 
 int main()
@@ -137,6 +163,9 @@ int main()
 
     int ans = height(root);
     cout << "\nThe height of the guven tree is : " << ans << endl;
-    int width = diameter(root);
+    // int width = diameter(root);
+    // cout << "The diameter of the given tree is : " << width << endl;
+
+    int width = diameter(root).first;
     cout << "The diameter of the given tree is : " << width << endl;
 }
