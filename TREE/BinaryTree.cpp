@@ -1,15 +1,28 @@
-// we will  be finding the height and diameter of the tree.
+// by love babbar : binarry tree.
 #include <iostream>
 #include <queue>
-#include <utility>
-#include "TreeNode.h"
 using namespace std;
 
-// recursive approach for taking input.
-Node<int> *TakeInput(Node<int> *root)
+template <typename T>
+class Node
 {
-    cout << "Enter the root node " << endl;
+public:
+    T data;
+    Node *left;
+    Node *right;
+
+    Node(T data)
+    {
+        this->data = data;
+        left = NULL;
+        right = NULL;
+    }
+};
+
+Node<int> *takeInput(Node<int> *root)
+{
     int data;
+    cout << "Enter the  node " << endl;
     cin >> data;
     root = new Node<int>(data);
 
@@ -18,20 +31,20 @@ Node<int> *TakeInput(Node<int> *root)
         return NULL;
     }
 
-    cout << "Enter the left node " << data << endl;
-    root->left = TakeInput(root->left);
+    cout << "Enter the left node of " << data << endl;
+    root->left = takeInput(root->left);
+    cout << "Enter the right node of " << data << endl;
+    root->right = takeInput(root->right);
 
-    cout << "Enter the right node " << data << endl;
-    root->right = TakeInput(root->right);
     return root;
 }
 
-// iterative approach for taking input.
-void IterativeInput(Node<int> *&root)
+// Taking input by using different order
+void LevelOrderInput(Node<int> *&root)
 {
     queue<Node<int> *> q;
     int data;
-    cout << "Enter the root node " << endl;
+    cout << "Enter the root data " << endl;
     cin >> data;
     root = new Node<int>(data);
     q.push(root);
@@ -40,26 +53,70 @@ void IterativeInput(Node<int> *&root)
     {
         Node<int> *temp = q.front();
         q.pop();
-
-        cout << "Enter the left Node for " << temp->data << endl;
-        cin >> data;
-        if (data != -1)
+        cout << "Enter the left node for " << temp->data << endl;
+        int nodeData;
+        cin >> nodeData;
+        if (nodeData != -1)
         {
-            temp->left = new Node<int>(data);
+            temp->left = new Node<int>(nodeData);
             q.push(temp->left);
         }
 
         cout << "Enter the right node for " << temp->data << endl;
-        cin >> data;
-        if (data != -1)
+        // int rightData;
+        cin >> nodeData;
+        if (nodeData != -1)
         {
-            temp->right = new Node<int>(data);
+            temp->right = new Node<int>(nodeData);
             q.push(temp->right);
         }
     }
 }
+void InOrder_print(Node<int> *root)
+{
+    // printing formate of tree-nodes in this order are : LEFT->NODE->RIGHT
+    cout << "Formed tree is : " << endl;
 
-void print(Node<int> *root)
+    if (root == NULL)
+    {
+        return;
+    }
+
+    InOrder_print(root->left);
+    cout << root->data << " ";
+    InOrder_print(root->right);
+}
+
+void preOrder_Print(Node<int> *root)
+{
+    // printing formate of tree-nodes in this order are : NODE -> LEFT -> RIGHT
+    cout << "Formed tree is : " << endl;
+    if (root == NULL)
+    {
+        return;
+    }
+
+    cout << root->data << " ";
+    preOrder_Print(root->left);
+    preOrder_Print(root->right);
+}
+
+void postOrder_print(Node<int> *root)
+{
+    // printing formate of tree-nodes in this order are : LEFT -> RIGHT -> NODE
+    cout << "Formed tree is : " << endl;
+    if (root == NULL)
+    {
+        return;
+    }
+
+    postOrder_print(root->left);
+    postOrder_print(root->right);
+    cout << root->data << " ";
+}
+
+// printing the data level wise.
+void LevelOrderprint(Node<int> *root)
 {
     cout << "Formed tree is : " << endl;
     queue<Node<int> *> q;
@@ -82,90 +139,36 @@ void print(Node<int> *root)
         else
         {
             cout << temp->data << " ";
-
             if (temp->left != NULL)
-            {
                 q.push(temp->left);
-            }
             if (temp->right != NULL)
-            {
                 q.push(temp->right);
-            }
         }
     }
 }
 
-// finding the  height of the given tree.
-
-int height(Node<int> *root)
-{
-
-    if (root == NULL)
-    {
-        return 0;
-    }
-
-    int left = height(root->left);
-    int right = height(root->right);
-
-    return (max(left, right) + 1);
-}
-
-// finding the width of tree.
-
-// int diameter(Node<int> *root)
-// {
-
-//     if (root == NULL)
-//     {
-//         return 0;
-//     }
-
-//     int l = diameter(root->left);
-//     int r = diameter(root->right);
-//     int h = height(root->left) + height(root->right) + 1;
-//     int ans = max(l, max(r, h));
-//     return ans;
-// }
-
-pair<int, int> diameter(Node<int> *root)
-{
-    //height = second and diameter = first;
-    if (root == NULL)
-    {
-        pair<int, int> p = make_pair(0, 0);
-        return p;
-    }
-
-    pair<int,int> left = diameter(root->left);
-    pair<int,int> right = diameter(root->right);
-
-    int opn1 = left.second;
-    int opn2 = right.second;
-    int opn3 = left.first+right.first+1;
-
-    pair<int,int> ans;
-    //diameter
-    ans.first = max(opn1, max(opn2,opn3));
-    //height
-    ans.second = max(left.first , right.first)+1;
-
-    return ans;    
-}
-
 int main()
 {
+    // // input example : 1 2 3 -1 -1 4 -1 -1 5 6 -1 -1 -1
     Node<int> *root = NULL;
-    // root = TakeInput(root);
-    IterativeInput(root);
-    // example : 1 2 3 4 5 6 7 8 9 10 11 -1 -1 12 -1 13 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
-    print(root);
+    // root = takeInput(root);
+    //input example : 1 2 3 4 5 6 7 -1 -1 -1 -1 -1 -1 -1 -1 
+    LevelOrderInput(root);
+    LevelOrderprint(root);
 
-    int ans = height(root);
-    cout << "\nThe height of the guven tree is : " << ans << endl;
-    // int width = diameter(root);
-    // cout << "The diameter of the given tree is : " << width << endl;
+    // cout << "sequencial form " << endl;
+    // print(root);
+    // cout << endl;
 
-    int width = diameter(root).first;
-    cout << "The diameter of the given tree is : " << width << endl;
+    // cout << "In order : ";
+    // InOrder_print(root);
+    // cout << endl;
+
+    // cout << "pre_order : ";
+    // preOrder_Print(root);
+    // cout << endl;
+
+    // cout << "pre_order : ";
+    // postOrder_print(root);
+    // cout << endl;
 }
