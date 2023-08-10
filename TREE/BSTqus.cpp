@@ -173,4 +173,13 @@ int main()
     //     cin >> x >> y;
     //     printInRange(root, x, y);
     // }
+    {
+        timer T;
+        Node *temp;
+        int a = 0;
+        cout << "After replacing the nodes with their respective levels : " << endl;
+        temp = replaceNodeWithLevel(root, a);
+        cout << temp->data <<" temp\n";
+        Levelprinting(temp);
+    }
 }
