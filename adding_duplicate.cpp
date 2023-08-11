@@ -184,5 +184,7 @@ int main()
     // cin >> x;
     // root = addDuplicate(root, x);
     // Levelprinting(root);
-    
-}
+
+    cout << "Duplicate of all nodes " << endl;
+    root = duplicate(root);
+    Levelprinting(root);
