@@ -156,7 +156,7 @@ int main()
     LevelOrderInput(root);
     LevelOrderprint(root);
 
-    // cout << "sequencial form " << endl;
+     cout << "sequencial form " << endl;
     // print(root);
     // cout << endl;
 
