@@ -131,6 +131,11 @@ int main()
 
     // Sample Output 2 :
     // true
-   
+    cout << "enter the root data ";
+    Node *root;
+    takeinput(root);
+    Levelprinting(root);
+    cout << endl;
+    cout << "the tree is : " << checkBalancedBst(root) << endl;
     return 0;
 }
