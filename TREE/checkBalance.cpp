@@ -106,6 +106,7 @@ int checkAllNodes(Node *root)
     return (abs(left - right) + 1);
 }
 
+// 0, 1
 bool checkBalancedBst(Node *root)
 {
     if (root == NULL)
@@ -117,6 +118,32 @@ bool checkBalancedBst(Node *root)
         return false;
 
     return true;
+}
+
+// check balance with data
+bool balancedBST(Node *root)
+{
+    if (root == NULL)
+    {
+        cout << "root = NULL " << endl;
+        return true;
+    }
+
+    if (root != NULL && root->left != NULL && root->left->data > root->data)
+    {
+        cout << "root->left->data > root->data " << root->left->data << " > " << root->data << endl;
+        return false;
+    }
+
+    if (root != NULL && root->right != NULL && root->right->data < root->data)
+    {
+        cout << "root->right->data > root->data " << root->right->data << " > " << root->data << endl;
+        return false;
+    }
+
+    bool left = balancedBST(root->left);
+    bool right = balancedBST(root->right);
+    return left && right;
 }
 
 int main()
@@ -136,6 +163,7 @@ int main()
     takeinput(root);
     Levelprinting(root);
     cout << endl;
-    cout << "the tree is : " << checkBalancedBst(root) << endl;
+    cout << "the tree is avl or not : " << checkBalancedBst(root) << endl;
+    cout << "valid bst or not : " << balancedBST(root) << endl;
     return 0;
 }
