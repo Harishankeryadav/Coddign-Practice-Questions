@@ -6,7 +6,7 @@ using namespace std;
 string multiply(string num1, string num2)
 { // converting the string into number
     int i = 0;
-    int temp1 = 0, temp2 = 0;
+    long long int temp1 = 0, temp2 = 0;
     string num;
 
     while (i < num1.size())
@@ -57,10 +57,39 @@ string multiply(string num1, string num2)
         char d = (temp % 10) + '0';
         num = num + d;
         temp /= 10;
-        i++;
+        // i++;
     }
     cout << "num-> " << num;
     return num;
+}
+
+ string multiply2(std::string num1, std::string num2) {
+    long long int temp1 = 0, temp2 = 0;
+    
+    // Convert num1 to integer
+    for (char c : num1) {
+        if (temp1 > std::numeric_limits<int>::max() / 10) {
+            return "0"; // Overflow
+        }
+        temp1 = temp1 * 10 + (c - '0');
+    }
+    
+    // Convert num2 to integer
+    for (char c : num2) {
+        if (temp2 > std::numeric_limits<int>::max() / 10) {
+            return "0"; // Overflow
+        }
+        temp2 = temp2 * 10 + (c - '0');
+    }
+    
+    long long int mul = temp1 * temp2;
+    if (mul == 0) {
+        return "0";}
+    // } else if (mul > numeric_limits<int>::max() || mul < numeric_limits<int>::min()) {
+    //     return "Overflow";
+    // }
+
+    return std::to_string(mul);
 }
 
 int main()
@@ -74,7 +103,7 @@ int main()
     //         }
     //         cout << sum;
     string a = "0", b = "0";
-    string x = multiply(a, b);
+    string x = multiply2(a, b);
     cout << x;
     return 0;
 }
