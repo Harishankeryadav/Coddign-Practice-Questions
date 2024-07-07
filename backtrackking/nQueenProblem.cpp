@@ -36,12 +36,13 @@ void fun(int row)
             visited_d1[row + col] = 1;
             visited_d2[n + row - col] = 1;
 
-            cout << "possible row " << row +1<< " col:- " << col+1 << endl;
-            for (int i = 0; i < n; i++)
-            {
-                cout << s[i] << endl;
-            }
-            cout << endl;
+            //to see how code working to put the queen in place
+            // cout << "possible row " << row +1<< " col:- " << col+1 << endl;
+            // for (int i = 0; i < n; i++)
+            // {
+            //     cout << s[i] << endl;
+            // }
+            // cout << endl;
 
             // undo the done task
             fun(row + 1);
@@ -50,12 +51,14 @@ void fun(int row)
             visited_col[col] = 0;
             visited_d1[row + col] = 0;
             visited_d2[n + row - col] = 0;
-            cout << "backtrack row " << row + 1 << " col:- " << col +1 << endl;
-            for (int i = 0; i < n; i++)
-            {
-                cout << s[i] << endl;
-            }
-            cout << endl;
+
+            //to see the how backtracking is done
+            // cout << "backtrack row " << row + 1 << " col:- " << col +1 << endl;
+            // for (int i = 0; i < n; i++)
+            // {
+            //     cout << s[i] << endl;
+            // }
+            // cout << endl;
         }
     }
 }
