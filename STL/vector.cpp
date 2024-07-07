@@ -1,6 +1,9 @@
 /*vector is somewhat simmilar to array.
  it is dynamic in nature.
 
+
+
+
   vector<int> v;                  initialization os a vector.
   vector<int> v1(5, 1);           here we have given the size of vector and initialized each indexs with 1 default value is 0.
   vector<int> v2(v);              we are coping all the data of v into v2.
